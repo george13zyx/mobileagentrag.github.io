@@ -55,6 +55,13 @@
       display: block;
       font-size: 0.9rem;
     }
+    .hero-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-bottom: 1.5rem;
+    }
   </style>
   
   <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -98,15 +105,15 @@
             
             <div class="is-size-5 publication-authors">
               <span class="author-block">
-                <a href="#">Yuxiang Zhou</a><sup>1,2,4*</sup>,</span>
+                <a href="#">Yuxiang Zhou</a><sup>1,2,4,*</sup>,</span>
               <span class="author-block">
-                <a href="#">Jichang Li</a><sup>2*</sup>,</span>
+                <a href="#">Jichang Li</a><sup>2,*</sup>,</span>
               <span class="author-block">
                 <a href="#">Yanhao Zhang</a><sup>3</sup>,</span>
               <span class="author-block">
                 <a href="#">Haonan Lu</a><sup>3</sup>,</span>
               <span class="author-block">
-                <a href="#">Guanbin Li</a><sup>1,2,4&#8224;</sup></span>
+                <a href="#">Guanbin Li</a><sup>1,2,4,&#8224;</sup></span>
             </div>
 
             <div class="is-size-5 publication-authors" style="margin-top: 10px; line-height: 1.4;">
@@ -174,12 +181,15 @@
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <video poster="" id="tree" autoplay controls muted loop height="100%">
-          <source src="static/videos/teaser.mp4" type="video/mp4">
-        </video>
-        <h2 class="subtitle has-text-centered">
-          Mobile-Agent-RAG integrates dual-level retrieval augmentation to reduce strategic hallucinations and improve execution accuracy.
-        </h2>
+        <div class="columns is-centered">
+          <div class="column is-full has-text-centered">
+            <img src="static/images/figure1.png" alt="Mobile-Agent-RAG Concept Overview"/>
+            <h2 class="subtitle has-text-centered">
+              <strong>Mobile-Agent-RAG</strong> is a novel hierarchical multi-agent framework integrating dual-level retrieval augmentation. 
+              [cite_start]It employs <strong>Manager-RAG</strong> to reduce strategic hallucinations in high-level planning and <strong>Operator-RAG</strong> to improve execution accuracy in low-level UI operations [cite: 12-15].
+            </h2>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -191,13 +201,13 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Mobile agents show immense potential, yet current state-of-the-art (SoTA) agents exhibit inadequate success rates on real-world, long-horizon, cross-application tasks. We attribute this bottleneck to the agents' excessive reliance on static, internal knowledge within MLLMs, which leads to two critical failure points: 1) strategic hallucinations in high-level planning and 2) operational errors during low-level execution on user interfaces (UI).
+              [cite_start]Mobile agents show immense potential, yet current state-of-the-art (SoTA) agents exhibit inadequate success rates on real-world, long-horizon, cross-application tasks[cite: 8]. [cite_start]We attribute this bottleneck to the agents' excessive reliance on static, internal knowledge within MLLMs, which leads to two critical failure points: 1) strategic hallucinations in high-level planning and 2) operational errors during low-level execution on user interfaces (UI)[cite: 9].
             </p>
             <p>
-              The core insight of this paper is that high-level planning and low-level UI operations require fundamentally distinct types of knowledge. Planning demands high-level, strategy-oriented experiences, whereas operations necessitate low-level, precise instructions closely tied to specific app UIs. Motivated by these insights, we propose <strong>Mobile-Agent-RAG</strong>, a novel hierarchical multi-agent framework that innovatively integrates dual-level retrieval augmentation.
+              The core insight of this paper is that high-level planning and low-level UI operations require fundamentally distinct types of knowledge. [cite_start]Planning demands high-level, strategy-oriented experiences, whereas operations necessitate low-level, precise instructions closely tied to specific app UIs [cite: 10-11]. Motivated by these insights, we propose <strong>Mobile-Agent-RAG</strong>, a novel hierarchical multi-agent framework that innovatively integrates dual-level retrieval augmentation.
             </p>
             <p>
-              At the planning stage, we introduce <strong>Manager-RAG</strong> to reduce strategic hallucinations by retrieving human-validated comprehensive task plans that provide high-level guidance. At the execution stage, we develop <strong>Operator-RAG</strong> to improve execution accuracy by retrieving the most precise low-level guidance for accurate atomic actions, aligned with the current app and subtask. To accurately deliver these knowledge types, we construct two specialized retrieval-oriented knowledge bases. Furthermore, we introduce <strong>Mobile-Eval-RAG</strong>, a challenging benchmark for evaluating such agents on realistic multi-app, long-horizon tasks. Extensive experiments demonstrate that Mobile-Agent-RAG significantly outperforms SoTA baselines, improving task completion rate by 11.0% and step efficiency by 10.2%, establishing a robust paradigm for context-aware, reliable multi-agent mobile automation.
+              At the planning stage, we introduce <strong>Manager-RAG</strong> to reduce strategic hallucinations by retrieving human-validated comprehensive task plans that provide high-level guidance. [cite_start]At the execution stage, we develop <strong>Operator-RAG</strong> to improve execution accuracy by retrieving the most precise low-level guidance for accurate atomic actions, aligned with the current app and subtask [cite: 13-15]. [cite_start]To accurately deliver these knowledge types, we construct two specialized retrieval-oriented knowledge bases[cite: 16]. [cite_start]Furthermore, we introduce <strong>Mobile-Eval-RAG</strong>, a challenging benchmark for evaluating such agents on realistic multi-app, long-horizon tasks[cite: 17]. [cite_start]Extensive experiments demonstrate that Mobile-Agent-RAG significantly outperforms SoTA baselines, improving task completion rate by 11.0% and step efficiency by 10.2%, establishing a robust paradigm for context-aware, reliable multi-agent mobile automation[cite: 18].
             </p>
           </div>
         </div>
@@ -205,40 +215,96 @@
     </div>
   </section>
 
-  <section class="hero is-small">
-    <div class="hero-body">
-      <div class="container">
-        <h2 class="title is-3 has-text-centered">Method Overview</h2>
-        <div id="results-carousel" class="carousel results-carousel">
-          <div class="item">
-            <img src="static/images/framework.jpg" alt="Mobile-Agent-RAG Framework" loading="lazy"/>
-            <h2 class="subtitle has-text-centered">
-              Overview of the Mobile-Agent-RAG Framework.
-            </h2>
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-3">Methodology</h2>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-full content">
+          <div class="has-text-centered">
+            <img src="static/images/framework.jpg" alt="Mobile-Agent-RAG Framework Architecture"/>
           </div>
-          <div class="item">
-            <img src="static/images/result1.jpg" alt="Results Comparison" loading="lazy"/>
-            <h2 class="subtitle has-text-centered">
-              Performance comparison on Mobile-Eval-RAG benchmark.
-            </h2>
+          <h4 class="title is-4">Hierarchical Multi-Agent Architecture</h4>
+          <p>
+            [cite_start]Mobile-Agent-RAG utilizes a hierarchical structure separating high-level planning from low-level execution[cite: 196]. The framework consists of two core agents:
+          </p>
+          <ul>
+            <li><strong>Manager Agent (empowered by Manager-RAG):</strong> Responsible for high-level strategic planning and subtask decomposition. [cite_start]It retrieves human-validated task plans ($D_{MR}$) to guide long-term strategies, effectively reducing strategic hallucinations [cite: 200-205].</li>
+            <li><strong>Operator Agent (empowered by Operator-RAG):</strong> Translates subtasks into concrete atomic actions. [cite_start]It interacts with the <strong>Operator-RAG</strong> knowledge base to retrieve app-specific, UI-grounded examples ($D_{OR}$) for precise action execution [cite: 209-212].</li>
+          </ul>
+          <p>
+            [cite_start]The system is further supported by auxiliary modules: a <strong>Perceptor</strong> for fine-grained visual perception, an <strong>Action Reflector</strong> for outcome evaluation, and a <strong>Notetaker</strong> for information aggregation [cite: 216-229].
+          </p>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-full content">
+          <h4 class="title is-4">Retrieval-Oriented Knowledge Base Collection</h4>
+          <div class="has-text-centered">
+             <img src="static/images/knowledge_base.jpg" alt="Knowledge Base Collection Process"/>
           </div>
+          <p>
+            [cite_start]To support the dual-level RAG mechanism, we construct two specialized knowledge bases[cite: 323]:
+          </p>
+          <ul>
+            <li><strong>Manager-RAG Knowledge Base ($K_{MR}$):</strong> Contains pairs of task instructions and human-annotated operation steps derived from the Mobile-Eval-RAG dataset. [cite_start]This supports high-level planning [cite: 325-329].</li>
+            <li><strong>Operator-RAG Knowledge Base ($K_{OR}^{app}$):</strong> Stores app-specific triples of (subtask, screenshot, action). [cite_start]These are collected via semi-automated logging and human verification to ensure precise atomic action generation [cite: 330-332].</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="hero is-small is-light">
-    <div class="hero-body">
-      <div class="container">
-        <h2 class="title is-3 has-text-centered">Video Presentation</h2>
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-four-fifths">
-            <div class="publication-video">
-              <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-          </div>
+  <section class="section is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-3">Experimental Results</h2>
         </div>
       </div>
+
+      <div class="columns is-centered">
+        <div class="column is-full content">
+          <h4 class="title is-4">Comparison with SoTA Baselines</h4>
+          <p>
+            [cite_start]We evaluated Mobile-Agent-RAG on the proposed <strong>Mobile-Eval-RAG</strong> benchmark, which features 50 challenging multi-app, long-horizon tasks[cite: 340].
+          </p>
+          <div class="has-text-centered">
+            <img src="static/images/table1.jpg" alt="Main Results Comparison Table"/>
+          </div>
+          <p>
+            As shown above, Mobile-Agent-RAG significantly outperforms baselines like Mobile-Agent-E and AppAgent. [cite_start]Specifically, it improves the <strong>Task Completion Rate (CR) by 11.0%</strong> and <strong>Step Efficiency by 10.2%</strong> on complex multi-app tasks[cite: 18, 381].
+          </p>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-half content">
+          <h4 class="title is-4">Generalization Across MLLMs</h4>
+          <div class="has-text-centered">
+             <img src="static/images/figure4.jpg" alt="Performance across MLLMs"/>
+          </div>
+          <p>
+            Our framework demonstrates robust generalization across different backbone models (Gemini-1.5-Pro, GPT-4o, Claude-3.5-Sonnet). [cite_start]Notably, RAG provides greater compensation for weaker models while continuing to boost stronger ones [cite: 384-385].
+          </p>
+        </div>
+
+        <div class="column is-half content">
+          <h4 class="title is-4">Ablation Analysis</h4>
+          <div class="has-text-centered">
+             <img src="static/images/figure5.jpg" alt="Ablation Study"/>
+          </div>
+          <p>
+            Ablation studies confirm the necessity of both modules. [cite_start]Removing <strong>Operator-RAG</strong> significantly lowers execution accuracy (OA), while removing <strong>Manager-RAG</strong> limits the maximum achievable success rate in long-horizon planning [cite: 388-389].
+          </p>
+        </div>
+      </div>
+
     </div>
   </section>
 
